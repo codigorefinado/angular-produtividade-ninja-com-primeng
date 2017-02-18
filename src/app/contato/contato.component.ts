@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ContatoComponentService } from './contato.component.service';
 
 @Component({
   selector: 'contato-component',
@@ -6,10 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: [ './contato.component.css' ]
 })
 export class ContatoComponent {
-  clicks: number = 0;
-
-  count() {
-    this.clicks++;
+  constructor(private contatoComponentService: ContatoComponentService) {
   }
 
+  enviarContato(contatoForm: NgForm) {
+
+    this.contatoComponentService.enviarContato(contatoForm.value).subscribe((response) => {
+      console.log('Response', response);
+    });
+
+
+  }
 }
